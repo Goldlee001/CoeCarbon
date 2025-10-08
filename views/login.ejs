@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/log.css"> 
+</head>
+<body>
+        <div id="mobile-only-warning">
+        <div class="warning-content">
+            <h1>🚫 Site Unavailable</h1>
+            <p>Please switch to a mobile phone or shrink your browser window to continue.</p>
+            <p>This application is designed for mobile screens only.</p>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="logo"><img src="/img/regi.png" alt="Logo"></div>
+
+        <div class="form-card">
+            <h2>Welcome Back</h2>
+
+            <% if (error) { %>
+                <p style="color: red; text-align: center;"><%= error %></p>
+            <% } %>
+
+            <form action="/login" method="POST">
+                <select name="countryCode">
+                    <option value="">Select Region</option>
+                    <option value="+234">Nigeria +234</option>
+                    <option value="+1">United States +1</option>
+                    <option value="+44">United Kingdom +44</option>
+                    <option value="+91">India +91</option>
+                </select>
+
+                <input type="text" name="phoneNumber" placeholder="Please enter phone number" required>
+                <input type="password" name="password" placeholder="Please enter password" required>
+
+                <button class="login-btn" type="submit">Log in</button>
+            </form>
+
+            <span class="register-link">Don't have an account? <a href="/register">Register</a></span>
+        </div>
+    </div>
+
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

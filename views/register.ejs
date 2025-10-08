@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="<%= locale %>">
+<head>
+<meta charset="UTF-8">
+<!-- CRITICAL FIX: This line makes the page scale correctly on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/reg.css">
+</head>
+<body>
+<!-- The warning is hidden on mobile screens by the CSS below -->
+<div id="mobile-only-warning">
+<div class="warning-content">
+<h1>🚫 <%= __("Site Unavailable") %></h1>
+<p><%= __("Please switch to a mobile phone or shrink your browser window to continue.") %></p>
+<p><%= __("This application is designed for mobile screens only.") %></p>
+</div>
+</div>
+
+<!-- The wrapper (form) is shown on mobile screens by the CSS below -->
+<div class="wrapper">
+    <div class="logo"><img src="/img/regi.png" alt="Logo"></div>
+
+    <div class="form-card">
+        <h2><%= __("Create Account") %></h2>
+
+        <% if (error) { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
+
+        <form action="/register" method="POST"> 
+            
+            <select name="countryCode">
+                <option value="+234"><%= __("Nigeria") %> +234</option>
+                <option value="+1"><%= __("United States") %> +1</option>
+                <option value="+44"><%= __("United Kingdom") %> +44</option>
+                <option value="+91"><%= __("India") %> +91</option>
+            </select>
+
+            <input type="text" name="phoneNumber" placeholder="<%= __("Please enter phone number") %>" required>
+            <input type="password" name="password" placeholder="<%= __("Please enter password") %>" required>
+            <input type="password" name="confirmPassword" placeholder="<%= __("Please confirm password") %>" required>
+
+            <div class="captcha-row">
+                <input type="text" name="userCaptcha" placeholder="<%= __("Please enter the verification code") %>" required>
+                <div class="captcha-code"><%= captcha %></div>
+            </div>
+
+            <input type="text" name="referralCode" placeholder="<%= __("Please enter referral code (optional)") %>">
+
+            <div class="checkbox">
+                <input type="checkbox" id="agreement-check" name="agreement" required>
+                <label for="agreement-check">
+                    <%= __("I have read and agree to the") %> <a href="#"><%= __("User Agreement") %></a>
+                </label>
+            </div>
+
+            <button class="register-btn" id="register-button" type="submit" disabled>
+                <%= __("Register") %>
+            </button>
+        </form>
+
+        <span class="login-link">
+            <%= __("Already have an account?") %> <a href="/login"><%= __("Login") %></a>
+        </span>
+    </div>
+</div>
+
+<script>
+    // CLIENT-SIDE JAVASCRIPT FOR BUTTON STATE
+    const checkbox = document.getElementById('agreement-check');
+    const registerButton = document.getElementById('register-button');
+
+    // Function to update the button state
+    function updateButtonState() {
+        if (checkbox.checked) {
+            registerButton.removeAttribute('disabled');
+            registerButton.style.opacity = '1.0'; // Fully visible
+        } else {
+            registerButton.setAttribute('disabled', 'disabled');
+            registerButton.style.opacity = '0.5'; // Transparent (disabled look)
+        }
+    }
+
+    // 1. Set the initial state when the page loads
+    updateButtonState(); 
+
+    // 2. Update the state every time the checkbox is clicked
+    checkbox.addEventListener('change', updateButtonState);
+</script>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

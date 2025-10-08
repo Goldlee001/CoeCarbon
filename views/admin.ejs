@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Admin Dashboard</title>
+</head>
+<body style="padding-top: 50px;">
+    <div style="padding: 20px;">
+        <h1>Admin Control Panel</h1>
+        <p>Welcome, Administrator.</p>
+        
+        <div class="alliance_cards" style="margin-top: 30px;">
+            <h2 class="card_title">User Management</h2>
+            <p><a href="/admin/users">View All Users</a></p>
+            <p><a href="/admin/settings">Global Settings</a></p>
+        </div>
+
+        <div class="alliance_cards" style="margin-top: 20px;">
+            <h2 class="card_title">Server Info</h2>
+            <p>Database Status: Connected</p>
+            <p>Total Users: **<%= totalUsers %>**</p>
+        </div>
+        
+        <a href="/logout" style="color: red; display: block; margin-top: 30px;">Logout</a>
+    </div>
+</body>
+</html>
